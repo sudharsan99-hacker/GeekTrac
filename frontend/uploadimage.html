@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Upload Image</title>
+        <link rel="stylesheet" href="uplaodimage.css">
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    </head>
+    <body>
+        <div class="hero">
+            <div class="card">
+                <button class="button"><span>Next</span></button>
+                <button class="button-left"><span> <a href="login.html">Back</a></span></button>
+                <h1 id="signupusername">
+                    <!-- <u>arvind</u> -->
+                    
+                </h1>
+                <p><span id="signupemail"></span></p>
+                <img src="images/profile_pic4.jpg" id="profile-pic">
+                <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file">
+                <!-- <label for="input-file"><i class='bx bx-upload'></i> Upload image</label> -->
+                <label for="input-file"><i class='fa-solid fa-upload'></i> Upload image</label>
+            </div>
+        </div>
+    
+    <script>
+        let profilePic = document.getElementById("profile-pic");
+        let inputFile = document.getElementById("input-file");
+
+        inputFile.onchange = function(){
+            profilePic.src = URL.createObjectURL(inputFile.files[0]);
+        }
+
+        const signupusername = document.getElementById('signupusername');
+        const signupemail = document.getElementById('signupemail');
+
+        document.getElementById("signupusername").textContent = localStorage.getItem("signupusername");
+        document.getElementById("signupemail").textContent = localStorage.getItem("signupemail");
+        console.log(signupusername);
+
+    </script>
+    </body>
+</html>
