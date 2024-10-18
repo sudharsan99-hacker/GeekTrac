@@ -1,0 +1,51 @@
+version: "3"
+services:
+  couchdb:
+    image: apache/couchdb
+    volumes:
+      - ./couchdb_data:/opt/couchdb/data
+      - ./couchdb_config.ini:/opt/couchdb/etc/local.ini
+    ports:
+      - 5984:5984
+
+  leetcode:
+    build:  ./leetcode
+    volumes:
+      - ./leetcode:/app/leetcode
+    environment:
+      PORT: 1006
+    secrets:
+      - couchdb_uname
+      - couchdb_passwd
+    
+  codechef:
+    build:  ./codechef
+    volumes:
+      - ./codechef:/app/codechef
+    environment:
+      PORT: 1006
+    secrets:
+      - couchdb_uname
+      - couchdb_passwd
+  
+  geektrac:
+    build:  ./geektrac
+    volumes:
+      - ./geektrac:/app/geektrac
+    environment:
+      PORT: 5000
+    ports:
+      - 5000:5000
+    secrets:
+      - couchdb_uname
+      - couchdb_passwd
+      - secret_key
+  
+    
+secrets:
+  couchdb_uname:
+    file: ./secret/couchdb_uname.txt
+  couchdb_passwd:
+    file: ./secret/couchdb_passwd.txt
+  secret_key:
+    file: ./secret/secret_key.txt
